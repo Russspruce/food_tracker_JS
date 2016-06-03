@@ -18,6 +18,37 @@ export class MealPipe implements PipeTransform {
       return input.filter((meal) => {
         return meal.calories <= calorieAmount;
       });
+    } else if (desiredMealState === "Monday") {
+      return input.filter((meal) => {
+        return meal.date === "Monday";
+      });
+    } else if (desiredMealState === "Tuesday") {
+      return input.filter((meal) => {
+        return meal.date === "Tuesday";
+      });
+    } else if (desiredMealState === "Wednesday") {
+      return input.filter((meal) => {
+        return meal.date === "Wednesday";
+      });
+    }
+    else if (desiredMealState === "Thrusday") {
+      return input.filter((meal) => {
+        return meal.date === "Thrusday";
+      });
+    } else if (desiredMealState === "Friday") {
+      return input.filter((meal) => {
+        return meal.date === "Friday";
+      });
+    }
+    else if (desiredMealState === "Saturday") {
+      return input.filter((meal) => {
+        return meal.date === "Saturday";
+      });
+    }
+    else if (desiredMealState === "Sunday") {
+      return input.filter((meal) => {
+        return meal.date === "Sunday";
+      });
     } else {
       return input;
     }

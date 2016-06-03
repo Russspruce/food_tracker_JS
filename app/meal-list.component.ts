@@ -16,6 +16,16 @@ import { MealPipe } from './meal.pipe';
     <option value="Unhealthy">Show Unhealthy Meals</option>
     <option value="Healthy">Show Healthy Meals</option>
   </select>
+  <select (change)="onChange($event.target.value)">
+    <option value="all">Week</option>
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+    <option value="Sunday">Sunday</option>
+  </select>
     <meal-display *ngFor="#currentMeal of mealList| calories:filterCalories" (click)="mealClicked(currentMeal)"
     [meal]="currentMeal"
     [class.selected]="currentMeal === selectedMeal" >
