@@ -9,7 +9,7 @@ import { Component, EventEmitter } from 'angular2/core';
   // directives: [MealListComponent],
   template: `
   <div class="container">
-    <h3 *ngFor="#currentMeal of mealList" (click)="mealClicked(currentMeal)">
+    <h3 *ngFor="#currentMeal of mealList" (click)="mealClicked(currentMeal)" [class.selected]="currentMeal === selectedMeal">
  +      {{ currentMeal.name }}
  +    </h3>
   </div>
@@ -19,11 +19,13 @@ import { Component, EventEmitter } from 'angular2/core';
 export class MealListComponent {
   public mealList: Meal[];
   public onMealSelect: EventEmitter<Meal>;
+  public selectedMeal: Meal;
   constructor() {
     this.onMealSelect = new EventEmitter();
   }
   mealClicked(clickedMeal: Meal): void {
     console.log('child', clickedMeal);
+    this.selectedMeal = clickedMeal;
     this.onMealSelect.emit(clickedMeal);
   }
 }
