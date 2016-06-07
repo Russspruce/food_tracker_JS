@@ -2,6 +2,7 @@ import { Component, EventEmitter } from 'angular2/core';
 import { MealComponent } from './meal.component';
 import { Meal } from './meal.model';
 import { NewMealComponent } from './new-meal.component';
+import { MealInfoComponent } from './meal-info.component';
 import { EditMealComponent } from './edit-meal.component';
 import { MealPipe } from './meal.pipe';
 
@@ -9,7 +10,7 @@ import { MealPipe } from './meal.pipe';
   selector: 'meal-list',
   inputs: ['mealList'],
   pipes: [MealPipe],
-  directives: [MealComponent, EditMealComponent, NewMealComponent],
+  directives: [MealComponent, MealInfoComponent, EditMealComponent, NewMealComponent],
   template: `
   <select (change)="onChange($event.target.value)">
     <option value="all" selected="selected">Show All</option>
@@ -26,10 +27,22 @@ import { MealPipe } from './meal.pipe';
     <option value="Saturday">Saturday</option>
     <option value="Sunday">Sunday</option>
   </select>
-    <meal-display *ngFor="#currentMeal of mealList| calories:filterCalories" (click)="mealClicked(currentMeal)"
-    [meal]="currentMeal"
-    [class.selected]="currentMeal === selectedMeal" >
-      </meal-display>
+  <div class="row">
+       <div class="col-xs-6">
+         <meal-display *ngFor="#currentMeal of mealList"
+           (click)="mealClicked(currentMeal)"
+           [class.selected]="currentMeal === selectedMeal"
+           [meal]="currentMeal">
+         </meal-display>
+       </div>
+
+       <div *ngIf="selectedMeal" class="col-xs-6">
+         <h3>Meal Info:</h3>
+         <meal-info-list
+           [meal]="selectedMeal">
+         </meal-info-list>
+       </div>
+     </div>
     <edit-meal *ngIf="selectedMeal" [meal]="selectedMeal"></edit-meal>
     <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
   `
